@@ -33,6 +33,12 @@ class OrderLine
      */
     private $quantity;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="id_order_line")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $order_related;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +76,18 @@ class OrderLine
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getOrderRelated(): ?Order
+    {
+        return $this->order_related;
+    }
+
+    public function setOrderRelated(?Order $order_related): self
+    {
+        $this->order_related = $order_related;
 
         return $this;
     }

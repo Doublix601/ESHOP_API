@@ -38,6 +38,14 @@ class ApiProductController extends AbstractController
         return $this->json($productRepository->findBy(array('id' => $id)),200,[], ['groups' => 'product:read']);
     }
 
+    /**
+     * @Route("/api/products/get/category/{id}", name="api_product_byid", methods={"GET"})
+     */
+    public function bycategory(ProductRepository $productRepository,$id)
+    {
+        return $this->json($productRepository->findBy(array('category' => $id)),200,[], ['groups' => 'product:read']);
+    }
+
 
     // --- POST ---
     /**

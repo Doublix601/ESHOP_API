@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,16 +33,6 @@ class Order
     /**
      * @ORM\Column(type="integer")
      */
-    private $client;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $products;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $ht;
 
     /**
@@ -51,17 +43,28 @@ class Order
     /**
      * @ORM\Column(type="integer")
      */
-    private $ecotax;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $delivery_price;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $ttc;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=delivery::class, inversedBy="orders")
+     */
+    private $id_delivery;
+
+    /**
+     * @ORM\OneToMany(targetEntity=orderline::class, mappedBy="order_related")
+     */
+    private $id_order_line;
+
+    public function __construct()
+    {
+        $this->id_order_line = new ArrayCollection();
+    }
 
 
 
@@ -94,30 +97,6 @@ class Order
         return $this;
     }
 
-    public function getClient(): ?int
-    {
-        return $this->client;
-    }
-
-    public function setClient(int $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    public function getProducts(): ?int
-    {
-        return $this->products;
-    }
-
-    public function setProducts(int $products): self
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-
     public function getHt(): ?int
     {
         return $this->ht;
@@ -142,30 +121,6 @@ class Order
         return $this;
     }
 
-    public function getEcotax(): ?int
-    {
-        return $this->ecotax;
-    }
-
-    public function setEcotax(int $ecotax): self
-    {
-        $this->ecotax = $ecotax;
-
-        return $this;
-    }
-
-    public function getDeliveryPrice(): ?int
-    {
-        return $this->delivery_price;
-    }
-
-    public function setDeliveryPrice(int $delivery_price): self
-    {
-        $this->delivery_price = $delivery_price;
-
-        return $this;
-    }
-
     public function getTtc(): ?int
     {
         return $this->ttc;
@@ -174,6 +129,60 @@ class Order
     public function setTtc(int $ttc): self
     {
         $this->ttc = $ttc;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?user
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?user $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getIdDelivery(): ?delivery
+    {
+        return $this->id_delivery;
+    }
+
+    public function setIdDelivery(?delivery $id_delivery): self
+    {
+        $this->id_delivery = $id_delivery;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|orderline[]
+     */
+    public function getIdOrderLine(): Collection
+    {
+        return $this->id_order_line;
+    }
+
+    public function addIdOrderLine(orderline $idOrderLine): self
+    {
+        if (!$this->id_order_line->contains($idOrderLine)) {
+            $this->id_order_line[] = $idOrderLine;
+            $idOrderLine->setOrderRelated($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdOrderLine(orderline $idOrderLine): self
+    {
+        if ($this->id_order_line->removeElement($idOrderLine)) {
+            // set the owning side to null (unless already changed)
+            if ($idOrderLine->getOrderRelated() === $this) {
+                $idOrderLine->setOrderRelated(null);
+            }
+        }
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Delivery;
+use App\Entity\Order;
 use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -81,6 +82,10 @@ class AppFixtures extends Fixture
 
             $manager->persist($product);
         }
+
+        //$order = new Order();
+
+        //$order->persist($order);
 
         $manager->flush();
     }

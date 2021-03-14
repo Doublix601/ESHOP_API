@@ -20,19 +20,31 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ApiAuthController extends AbstractController
 {
-    // --- GET ---
-    //Lire les utilisateurs
-
     /**
-     * @Route("/api/users/login", name="ApiLogin", methods={"POST"})
+     * @Route("/login", name="login", methods={"POST"})
      */
-    public function login(UserRepository $userRepository)
+    public function login(Request $request)
     {
-        return $this->json($userRepository->findOneBy(array('email' => "arnaud.doublix@gmail.com", 'password' => '$2y$13$teV/dYWdqxO1KtgOOp4CC.Tttud27T/QM9NFZ/06SLufrl6ixDwMW')),200,[], ['groups' => 'user:read']);
+        $user = $this->getUser();
+
+        return $this->json([
+            'username' => $user->getUsername(),
+            'roles' => $user->getRoles(),
+        ]);
     }
 
-    
-    // --- POST ---
+    /**
+     * @Route("/api/users/login", methods={"POST"})
+     */
+    public function login2(UserRepository $userRepository)
+    {
+        return $this->json($userRepository->findOneBy(array('email' => "arnaud.doublix@gmail.com", 'password' => '$2y$13$nrL.kK7n0SWIKMofOwgdoO8bW5xXi/7PO7NeuhQFSeWylU9.U3N3q')),200,[], ['groups' => 'user:read']);
+
+        //return $this->json($userRepository->findOneBy(array('email' => $email, 'password' => $password)),200,[], ['groups' => 'user:read']);
+    }
+
+
+
     /**
      * @Route("/api/user/get", name="ApiSignup", methods={"POST"})
      */
