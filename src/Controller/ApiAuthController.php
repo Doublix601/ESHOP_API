@@ -32,7 +32,7 @@ class ApiAuthController extends AbstractController
     }
 
     
-    // --- POST ---
+    // --- POST --
     /**
      * @Route("/api/user/get", name="ApiSignup", methods={"POST"})
      */
