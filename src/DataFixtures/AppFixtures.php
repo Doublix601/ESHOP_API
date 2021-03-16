@@ -17,27 +17,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $getCategory = $manager->getRepository(Category::class)->findOneBy(array('id'=>mt_rand(1, 3)));
-
         // $product = new Product();
         // $manager->persist($product);
-
-        // Create categories
-        $category = new Category();
-        $category->setName('T-shirt');
-        $manager->persist($category);
-
-        $category = new Category();
-        $category->setName('Sweat');
-        $manager->persist($category);
-
-        $category = new Category();
-        $category->setName('Polo');
-        $manager->persist($category);
-
-        $category = new Category();
-        $category->setName('Pantalon');
-        $manager->persist($category);
 
         // Delivery options
         // Option 1
@@ -71,7 +52,6 @@ class AppFixtures extends Fixture
             $product->setBrand('Marque de test');
             $product->setImg("/assets/img/site/404_products.png");
             $product->setTva('20');
-            $product->setCategory($getCategory);
             $product->setDeliveryOption('Standard');
             $product->setDescriptionCourte('Ceci est la description courte du produit n°'.$i);
             $product->setEcotax('0.05');

@@ -124,13 +124,6 @@ class Product
     private $stock;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @Assert\NotBlank(message="Veuillez insérer une donnée")
-     * @Assert\Length(min=3)
-     */
-    private $category;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Groups("product:read")
      * @Assert\NotBlank(message="Veuillez insérer une donnée")
@@ -275,18 +268,6 @@ class Product
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }
