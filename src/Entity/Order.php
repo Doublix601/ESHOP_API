@@ -52,12 +52,7 @@ class Order
     private $id_user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=delivery::class, inversedBy="orders")
-     */
-    private $id_delivery;
-
-    /**
-     * @ORM\OneToMany(targetEntity=orderline::class, mappedBy="order_related")
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderLine", mappedBy="order_related")
      */
     private $id_order_line;
 
@@ -65,8 +60,6 @@ class Order
     {
         $this->id_order_line = new ArrayCollection();
     }
-
-
 
     public function getId(): ?int
     {
@@ -145,18 +138,6 @@ class Order
         return $this;
     }
 
-    public function getIdDelivery(): ?delivery
-    {
-        return $this->id_delivery;
-    }
-
-    public function setIdDelivery(?delivery $id_delivery): self
-    {
-        $this->id_delivery = $id_delivery;
-
-        return $this;
-    }
-
     /**
      * @return Collection|orderline[]
      */
@@ -186,4 +167,6 @@ class Order
 
         return $this;
     }
+
+
 }

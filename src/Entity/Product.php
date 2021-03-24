@@ -97,19 +97,6 @@ class Product
     private $ecotax;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Veuillez insérer une donnée")
-     * @Assert\Length(min=3)
-     */
-    private $delivery_option;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Veuillez insérer une donnée")
-     */
-    private $delivery_price;
-
-    /**
      * @ORM\Column(type="integer")
      * @Groups("product:read")
      * @Assert\NotBlank(message="Veuillez insérer une donnée")
@@ -146,7 +133,6 @@ class Product
      */
     private $description_courte;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -176,12 +162,12 @@ class Product
         return $this;
     }
 
-    public function getHtPrice(): ?int
+    public function getHtPrice(): ?float
     {
         return $this->ht_price;
     }
 
-    public function setHtPrice(int $ht_price): self
+    public function setHtPrice(float $ht_price): self
     {
         $this->ht_price = $ht_price;
 
@@ -212,38 +198,14 @@ class Product
         return $this;
     }
 
-    public function getEcotax(): ?int
+    public function getEcotax(): ?float
     {
         return $this->ecotax;
     }
 
-    public function setEcotax(int $ecotax): self
+    public function setEcotax(float $ecotax): self
     {
         $this->ecotax = $ecotax;
-
-        return $this;
-    }
-
-    public function getDeliveryOption(): ?string
-    {
-        return $this->delivery_option;
-    }
-
-    public function setDeliveryOption(string $delivery_option): self
-    {
-        $this->delivery_option = $delivery_option;
-
-        return $this;
-    }
-
-    public function getDeliveryPrice(): ?int
-    {
-        return $this->delivery_price;
-    }
-
-    public function setDeliveryPrice(int $delivery_price): self
-    {
-        $this->delivery_price = $delivery_price;
 
         return $this;
     }
@@ -307,4 +269,5 @@ class Product
 
         return $this;
     }
+
 }

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -41,11 +42,10 @@ class UserFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setFirstName($firstname);
             $user->setLastName($lastname);
-            $user->setAdress('39 rue de la fontaine Saint Martin');
+            $user->setAdress('39 rue de la fontaine saint martin');
             $user->setCp('60350');
             $user->setCity('Attichy');
             $user->setCountry('France');
-            $user->setActive('1');
 
             $manager->persist($user);
         }
@@ -57,11 +57,10 @@ class UserFixtures extends Fixture
         $user->setRoles(['ROLE_ADMIN']);
         $user->setFirstName('Arnaud');
         $user->setLastName('THERET');
-        $user->setAdress('39 rue de la fontaine Saint Martin');
+        $user->setAdress('39 rue de la fontaine saint martin');
         $user->setCp('60350');
         $user->setCity('Attichy');
         $user->setCountry('France');
-        $user->setActive('1');
 
         $manager->persist($user);
 

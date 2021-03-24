@@ -24,7 +24,7 @@ class ApiUserController extends AbstractController
     //Lire les utilisateurs
 
     /**
-     * @Route("/api/users/get", name="api_user_all", methods={"GET"})
+     * @Route("/api/users", name="api_user_all", methods={"GET"})
      */
     public function all(UserRepository $userRepository)
     {
@@ -32,7 +32,7 @@ class ApiUserController extends AbstractController
     }
 
     /**
-     * @Route("/api/user/get/id/{id}", name="api_user_byid", methods={"GET"})
+     * @Route("/api/users/{id}", name="api_user_byid", methods={"GET"})
      */
     public function getbyid(UserRepository $userRepository,$id)
     {
@@ -42,7 +42,7 @@ class ApiUserController extends AbstractController
     
     // --- POST ---
     /**
-     * @Route("/api/user/get", name="api_user_store", methods={"POST"})
+     * @Route("/api/users", name="api_user_store", methods={"POST"})
      */
     public function store(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
         $jsonRecu = $request->getContent();
@@ -72,7 +72,7 @@ class ApiUserController extends AbstractController
 
     // --- DELETE ---
     /**
-     * @Route("/api/user/delete/id/{id}", name="delete_api_user_byid", methods={"GET"})
+     * @Route("/api/users/{id}", name="delete_api_user_byid", methods={"GET"})
      */
     public function deletebyid(UserRepository $userRepository,$id)
     {

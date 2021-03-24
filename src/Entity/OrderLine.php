@@ -44,6 +44,18 @@ class OrderLine
         return $this->id;
     }
 
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
     public function getIdOrder(): ?order
     {
         return $this->id_order;
@@ -68,18 +80,6 @@ class OrderLine
         return $this;
     }
 
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
     public function getOrderRelated(): ?Order
     {
         return $this->order_related;
@@ -91,4 +91,5 @@ class OrderLine
 
         return $this;
     }
+
 }

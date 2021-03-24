@@ -25,6 +25,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("user:read")
+     * @Groups("user:login")
      */
     private $email;
 
@@ -38,32 +39,9 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Groups("user:read")
+     * @Groups("user:login")
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups("user:read")
-     */
-    private $adress;
-
-    /**
-     * @ORM\Column(type="string", length=5)
-     * @Groups("user:read")
-     */
-    private $cp;
-
-    /**
-     * @ORM\Column(type="string", length=35)
-     * @Groups("user:read")
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=35)
-     * @Groups("user:read")
-     */
-    private $country;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -78,12 +56,6 @@ class User implements UserInterface
     private $last_name;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups("user:read")
-     */
-    private $active;
-
-    /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $apiToken;
@@ -92,6 +64,28 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="id_user")
      */
     private $orders;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $cp;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $country;
+
+
 
     public function __construct()
     {
@@ -176,54 +170,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(string $adress): self
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getCp(): ?string
-    {
-        return $this->cp;
-    }
-
-    public function setCp(string $cp): self
-    {
-        $this->cp = $cp;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
     public function getFirstName(): ?string
     {
         return $this->first_name;
@@ -298,6 +244,54 @@ class User implements UserInterface
                 $order->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(?string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(?string $cp): self
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

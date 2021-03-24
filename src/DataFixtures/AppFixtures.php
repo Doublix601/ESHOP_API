@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Adress;
 use App\Entity\Category;
 use App\Entity\Delivery;
 use App\Entity\Order;
@@ -20,28 +21,6 @@ class AppFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        // Delivery options
-        // Option 1
-        $delivery = new Delivery();
-        $delivery->setType('Standard');
-        $delivery->setDeliveryTime(4);
-        $delivery->setPrice(5);
-        $manager->persist($delivery);
-
-        // Option 2
-        $delivery = new Delivery();
-        $delivery->setType('Rapide');
-        $delivery->setDeliveryTime(2);
-        $delivery->setPrice(9.99);
-        $manager->persist($delivery);
-
-        // Option 3
-        $delivery = new Delivery();
-        $delivery->setType('Livraison en 1 jour');
-        $delivery->setDeliveryTime(1);
-        $delivery->setPrice(15);
-        $manager->persist($delivery);
-
         // Create 20 products
         for ($i = 0; $i < 20; $i++) {
             $product = new Product();
@@ -52,12 +31,10 @@ class AppFixtures extends Fixture
             $product->setBrand('Marque de test');
             $product->setImg("/assets/img/site/404_products.png");
             $product->setTva('20');
-            $product->setDeliveryOption('Standard');
             $product->setDescriptionCourte('Ceci est la description courte du produit n°'.$i);
             $product->setEcotax('0.05');
             $product->setTtcPrice(mt_rand(10, 100));
             $product->setStock(mt_rand(1, 20));
-            $product->setDeliveryPrice('5');
             $product->setDiscount('0');
 
             $manager->persist($product);
