@@ -72,7 +72,7 @@ class ApiUserController extends AbstractController
 
     // --- DELETE ---
     /**
-     * @Route("/api/users/{id}", name="delete_api_user_byid", methods={"GET"})
+     * @Route("/api/users/delete/{id}", name="delete_api_user_byid", methods={"GET"})
      */
     public function deletebyid(UserRepository $userRepository,$id)
     {
@@ -82,7 +82,6 @@ class ApiUserController extends AbstractController
         $entityManager->flush();
 
         return $this->redirect('http://localhost:8000/usersview');
-        //return new Response("Utilisateur supprimé");
     }
 
 }
