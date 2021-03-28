@@ -40,7 +40,7 @@ class ApiUserController extends AbstractController
     
     // --- POST ---
     /**
-     * @Route("/api/users", name="api_user_store", methods={"POST"})
+     * @Route("/api/users/add", name="api_user_store", methods={"POST"})
      */
     public function store(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
         $jsonRecu = $request->getContent();
@@ -53,6 +53,8 @@ class ApiUserController extends AbstractController
             if(count($errors) > 0){
                 return $this->json($errors, 400);
             }
+
+            $user->setRoles(['ROLE_USER']);
 
             $em->persist($user);
             $em->flush();
