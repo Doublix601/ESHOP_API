@@ -62,26 +62,31 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Order::class, mappedBy="id_user")
+     * @Groups("user:read")
      */
     private $orders;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("user:read")
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
+     * @Groups("user:read")
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("user:read")
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups("user:read")
      */
     private $country;
 

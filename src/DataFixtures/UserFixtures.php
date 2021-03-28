@@ -65,6 +65,22 @@ class UserFixtures extends Fixture
         $manager->persist($user);
 
 
+
+        $user = new User();
+
+        $user->setEmail('contact@arnaud-theret.fr');
+        $user->setPassword($this->encoder->encodePassword($user, 'admin'));
+        $user->setRoles(['ROLE_USER']);
+        $user->setFirstName('Mattéo');
+        $user->setLastName('LORTHIOIS');
+        $user->setAdress('35 place Charles De Gaulle');
+        $user->setCp('60200');
+        $user->setCity('Compiègne');
+        $user->setCountry('France');
+
+        $manager->persist($user);
+
+
         $manager->flush();
     }
 }

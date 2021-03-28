@@ -21,8 +21,6 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class ApiUserController extends AbstractController
 {
     // --- GET ---
-    //Lire les utilisateurs
-
     /**
      * @Route("/api/users", name="api_user_all", methods={"GET"})
      */
