@@ -32,10 +32,8 @@ class AppFixtures extends Fixture
             $product->setImg("/assets/img/site/404_products.png");
             $product->setTva('20');
             $product->setDescriptionCourte('Ceci est la description courte du produit n°'.$i);
-            $product->setEcotax('0.05');
             $product->setTtcPrice(mt_rand(10, 100));
             $product->setStock(mt_rand(1, 20));
-            $product->setDiscount('0');
 
             $manager->persist($product);
         }

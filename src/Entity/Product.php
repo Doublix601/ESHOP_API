@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -87,21 +88,6 @@ class Product
      * @Assert\NotBlank(message="Veuillez insérer une donnée")
      */
     private $tva;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Groups("product:read")
-     * @Groups("product:ecotax")
-     * @Assert\NotBlank(message="Veuillez insérer une donnée")
-     */
-    private $ecotax;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups("product:read")
-     * @Assert\NotBlank(message="Veuillez insérer une donnée")
-     */
-    private $discount;
 
     /**
      * @ORM\Column(type="integer")
@@ -194,30 +180,6 @@ class Product
     public function setTva(int $tva): self
     {
         $this->tva = $tva;
-
-        return $this;
-    }
-
-    public function getEcotax(): ?float
-    {
-        return $this->ecotax;
-    }
-
-    public function setEcotax(float $ecotax): self
-    {
-        $this->ecotax = $ecotax;
-
-        return $this;
-    }
-
-    public function getDiscount(): ?int
-    {
-        return $this->discount;
-    }
-
-    public function setDiscount(int $discount): self
-    {
-        $this->discount = $discount;
 
         return $this;
     }

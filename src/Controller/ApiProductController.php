@@ -31,7 +31,7 @@ class ApiProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/product/get/id/{id}", name="api_product_byid", methods={"GET"})
+     * @Route("/api/products/get/id/{id}", name="api_product_byid", methods={"GET"})
      */
     public function byid(ProductRepository $productRepository,$id)
     {
@@ -41,18 +41,13 @@ class ApiProductController extends AbstractController
 
     // --- POST ---
     /**
-     * @Route("/api/product/post", name="api_product_store", methods={"POST"})
+     * @Route("/api/products/post", name="api_product_store", methods={"POST"})
      */
-    public function store(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
+    public function storeProduct(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
         $jsonRecu = $request->getContent();
 
         try{
             $product = $serializer->deserialize($jsonRecu, Product::class, 'json');
-
-            $product->setCategory('Sweat');
-
-            $product->setDeliveryOption('test');
-            $product->setDeliveryPrice(50.15);
 
             $errors = $validator->validate($product);
 
@@ -72,6 +67,50 @@ class ApiProductController extends AbstractController
             ], 400);
         }
 
+    }
+
+    // --- POST ---
+    /**
+     * @Route("/api/products/update", name="api_product_update", methods={"PUT"})
+     */
+    public function updateProduct(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
+        $jsonRecu = $request->getContent();
+
+        try{
+            $product = $serializer->deserialize($jsonRecu, Product::class, 'json');
+
+            $errors = $validator->validate($product);
+
+            if(count($errors) > 0){
+                return $this->json($errors, 400);
+            }
+
+            $em->persist($product);
+            $em->flush();
+
+            return $this->json($product, 201, [], ['groups' => 'product:read']);
+
+        }catch (NotEncodableValueException $e){
+            return $this->json([
+                'status' => 400,
+                'message' => $e->getMessage()
+            ], 400);
+        }
+
+    }
+
+    // --- DELETE ---
+    /**
+     * @Route("/api/products/delete/{id}", name="delete_api_product_byid", methods={"GET"})
+     */
+    public function productdeletebyid(ProductRepository $productRepository,$id)
+    {
+        $product = $this->getDoctrine()->getRepository(Product::class)->findOneBy(array('id' => $id));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        return $this->redirect('http://localhost:8000/productsview');
     }
 
 }
