@@ -41,7 +41,7 @@ class ApiProductController extends AbstractController
 
     // --- POST ---
     /**
-     * @Route("/api/products/post", name="api_product_store", methods={"POST"})
+     * @Route("/api/products/add", name="api_product_store", methods={"POST"})
      */
     public function storeProduct(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
         $jsonRecu = $request->getContent();
