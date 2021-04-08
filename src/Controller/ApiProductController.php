@@ -39,7 +39,6 @@ class ApiProductController extends AbstractController
     }
 
 
-    // --- POST ---
     /**
      * @Route("/api/products/add", name="api_product_store", methods={"POST"})
      */
@@ -69,9 +68,9 @@ class ApiProductController extends AbstractController
 
     }
 
-    // --- POST ---
+
     /**
-     * @Route("/api/products/update", name="api_product_update", methods={"PUT"})
+     * @Route("/api/products/edit", name="api_product_update", methods={"PUT"})
      */
     public function updateProduct(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator){
         $jsonRecu = $request->getContent();

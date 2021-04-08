@@ -67,7 +67,6 @@ class ApiUserController extends AbstractController
                 'message' => $e->getMessage()
             ], 400);
         }
-
     }
 
     // --- DELETE ---

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\OrderLineRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=OrderLineRepository::class)
@@ -14,28 +16,33 @@ class OrderLine
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("orderline:read")
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=order::class)
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("orderline:read")
      */
     private $id_order;
 
     /**
      * @ORM\OneToOne(targetEntity=product::class, cascade={"persist", "remove"})
+     * @Groups("orderline:read")
      */
     private $id_product;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("orderline:read")
      */
     private $quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity=Order::class, inversedBy="id_order_line")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("orderline:read")
      */
     private $order_related;
 

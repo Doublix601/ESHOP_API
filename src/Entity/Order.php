@@ -6,6 +6,8 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -17,42 +19,50 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $number;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("order:read")
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $ht;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $tva;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("order:read")
      */
     private $ttc;
 
     /**
      * @ORM\ManyToOne(targetEntity=user::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("order:read")
      */
     private $id_user;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\OrderLine", mappedBy="order_related")
+     * @Groups("order:read")
      */
     private $id_order_line;
 
